@@ -8,6 +8,8 @@ import (
 
 func realMain() int {
 	count := 0
+	pos := 0
+	basement := 0
 
 	data := make([]byte, 4096)
 	for {
@@ -27,9 +29,18 @@ func realMain() int {
 			case ')':
 				count--
 			}
+
+			pos++
+			if basement == 0 && count < 0 {
+				basement = pos
+			}
 		}
 	}
-	fmt.Println(count)
+
+	fmt.Println("Final Floor:", count)
+	if basement > 0 {
+		fmt.Println("First Basement Floor:", basement)
+	}
 	return 0
 }
 
